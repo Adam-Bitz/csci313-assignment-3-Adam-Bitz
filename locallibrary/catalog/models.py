@@ -146,3 +146,27 @@ class Author(models.Model):
     def __str__(self):
         """String for representing the Model object."""
         return f'{self.last_name}, {self.first_name}'
+
+class BookRequest(models.Model):
+    """Model representing a requested book."""
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=200)
+    author = models.CharField(max_length=200, blank=True)
+    comment = models.TextField(
+        max_length=1000, blank=True, help_text="Enter a brief description of why you're requsting this book")
+    
+    submitted = models.DateTimeField(auto_now_add=True)
+
+
+
+    isbn = models.CharField('ISBN', max_length=14, blank=True,
+                            help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn'
+                                      '">ISBN number</a>')
+
+    def get_absolute_url(self):
+        """Returns the URL to access a particular bookrequest instance."""
+        return reverse('request-detail', args=[str(self.id)])
+
+    def __str__(self):
+        """String for representing the Model object."""
+        return self.title

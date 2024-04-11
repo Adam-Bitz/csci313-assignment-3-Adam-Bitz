@@ -15,19 +15,29 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
   </head>
   <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#" style="padding-left:25px">Navbar</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="{% url 'index' %}">Home <span class="sr-only"></span></a>
+          <a class="nav-item nav-link" href="{% url 'books' %}">All books</a>
+          <a class="nav-item nav-link" href="{% url 'authors' %}">All authors</a>
+          <a class="nav-item nav-link" href="{% url 'requests' %}">Requested books</a>
+        </div>
+      </div>
+    </nav>
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-2">
           {% block sidebar %}
             <ul class="sidebar-nav">
-              <li><a href="{% url 'index' %}">Home</a></li>
-              <li><a href="{% url 'books' %}">All books</a></li>
-              <li><a href="{% url 'authors' %}">All authors</a></li>
-            </ul>
-            <ul class="sidebar-nav">
              {% if user.is_authenticated %}
                <li>User: {{ user.get_username }}</li>
                <li><a href="{% url 'my-borrowed' %}">My Borrowed</a></li>
+               <li><a href="{% url 'request-create' %}">Request a book</a></li>
                <li>
                  <form id="logout-form" method="post" action="{% url 'admin:logout' %}">
                    {% csrf_token %}
@@ -73,3 +83,4 @@
     </div>
   </body>
 </html>
+

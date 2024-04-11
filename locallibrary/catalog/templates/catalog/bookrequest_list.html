@@ -1,0 +1,24 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Book Request List</h1>
+  {% if bookrequest_list %}
+    <ul>
+      {% for request in bookrequest_list %}
+      <li>
+        <b><a href="{{ request.get_absolute_url }}">{{ request.title }}</a></b>  ({{request.author}}) {% if request.isbn != ''%}<b>ISBN:</b> {{ request.isbn }}{% endif %} <br>
+        <b>Reason for request:</b>
+        <p>{{request.comment}} 
+        <br>  
+        {% if perms.catalog.delete_bookrequest %}
+          <a href="{% url 'request-delete' pk=request.pk %}">Delete Request</a></li>
+        {% endif %}
+        </p>
+
+      </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>There are no book requests currently.</p>
+  {% endif %}
+{% endblock %}

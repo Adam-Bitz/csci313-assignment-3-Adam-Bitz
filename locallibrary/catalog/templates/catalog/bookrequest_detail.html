@@ -1,0 +1,9 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Title: {{ bookrequest.title }}</h1>
+
+  <p><strong>Author:</strong> {{ bookrequest.author }}</a></p>
+  <p><strong>Comments:</strong> {{ bookrequest.comment }}</p>
+  <p><strong>ISBN:</strong> {{ bookrequest.isbn }}</p>
+{% endblock %}

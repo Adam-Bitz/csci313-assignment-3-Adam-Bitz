@@ -1,6 +1,6 @@
 import datetime
 from django.shortcuts import render
-from .models import Book, Author, BookInstance, Genre
+from .models import Book, Author, BookInstance, Genre, BookRequest
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required, permission_required
@@ -176,3 +176,29 @@ class BookDelete(PermissionRequiredMixin, DeleteView):
             return HttpResponseRedirect(
                 reverse("book-delete", kwargs={"pk": self.object.pk})
             )
+
+class RequestCreate(PermissionRequiredMixin, CreateView):
+    model = BookRequest
+    fields = ['title', 'author', 'comment', 'isbn',]
+    permission_required = 'catalog.add_bookrequest'
+
+class RequestDelete(PermissionRequiredMixin, DeleteView):
+    model = BookRequest
+    success_url = reverse_lazy('requests')
+    permission_required = 'catalog.delete_bookrequest'
+
+    def form_valid(self, form):
+        try:
+            self.object.delete()
+            return HttpResponseRedirect(self.success_url)
+        except Exception as e:
+            return HttpResponseRedirect(
+                reverse("request-delete", kwargs={"pk": self.object.pk})
+            )
+
+class RequestListView(generic.ListView):
+    model = BookRequest
+    paginate_by = 10
+
+class RequestDetailView(generic.DetailView):
+    model = BookRequest
