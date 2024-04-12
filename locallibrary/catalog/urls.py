@@ -20,6 +20,5 @@ urlpatterns = [
     path('requests/', views.RequestListView.as_view(), name='requests'),
     path('request/create/', views.RequestCreate.as_view(), name='request-create'),
     path('request/<int:pk>/delete/', views.RequestDelete.as_view(), name='request-delete'),
-#    path('request/<int:pk>', RedirectView.as_view(url='../requests/', permanent=True)),
     path('request/<int:pk>', views.RequestDetailView.as_view(), name='request-detail'),
 ]

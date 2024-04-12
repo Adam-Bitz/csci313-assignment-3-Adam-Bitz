@@ -3,7 +3,7 @@
 {% block content %}
   <h1>Title: {{ bookrequest.title }}</h1>
 
-  <p><strong>Author:</strong> {{ bookrequest.author }}</a></p>
-  <p><strong>Comments:</strong> {{ bookrequest.comment }}</p>
-  <p><strong>ISBN:</strong> {{ bookrequest.isbn }}</p>
+  {%if bookrequest.author != ''%}<p><strong>Author:</strong> {{ bookrequest.author }}</a></p>{%endif%}
+  {%if bookrequest.comment != ''%}<p><strong>Comment:</strong> {{ bookrequest.comment }}</p>{%endif%}
+  {%if bookrequest.isbn != ''%}<p><strong>ISBN:</strong> {{ bookrequest.isbn }}</p>{%endif%}
 {% endblock %}

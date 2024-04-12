@@ -7,7 +7,7 @@
       {% for request in bookrequest_list %}
       <li>
         <b><a href="{{ request.get_absolute_url }}">{{ request.title }}</a></b>  ({{request.author}}) {% if request.isbn != ''%}<b>ISBN:</b> {{ request.isbn }}{% endif %} <br>
-        <b>Reason for request:</b>
+        <b>Reason for request / Comment :</b>
         <p>{{request.comment}} 
         <br>  
         {% if perms.catalog.delete_bookrequest %}
